@@ -4,8 +4,9 @@ import com.example.main.R
 
 object DataSource {
     val jenis = listOf(
-        R.string.laki,
-        R.string.wanita,)
+        "Laki-laki",
+        "Perempuan",
+        )
 
     val status = listOf(
         "Belum Menikah",

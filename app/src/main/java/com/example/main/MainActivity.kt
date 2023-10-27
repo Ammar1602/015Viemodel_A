@@ -118,8 +118,12 @@ fun TampilText(cobaViewModel: ViewModel = viewModel()){
         onSelectedChanged = {
             cobaViewModel.setJenisJK(it)
         })
+    SelectStatus(options =  jenis.map { id -> context.resources.getString(id) },
+        onSelectedChanged = {
+            cobaViewModel.setStatus(it)
+        })
     Button(modifier = Modifier.fillMaxWidth(),
-        onClick = {cobaViewModel.BacaData(textForm,phoneForm,alamatForm,dataForm.sex)
+        onClick = {cobaViewModel.BacaData(textForm,phoneForm,emailForm,alamatForm,dataForm.sex)
         }
     ) {
         Text(text = stringResource(R.string.submit),
@@ -128,10 +132,11 @@ fun TampilText(cobaViewModel: ViewModel = viewModel()){
     }
     Spacer(modifier = Modifier.height(150.dp))
     TextHasil(
-        namanya = cobaViewModel.namaUsr,
+        namanya = cobaViewModel.namaUSr,
         telponnya =cobaViewModel.noTlp ,
         jenisnya = cobaViewModel.jenisKL,
         alamatnya = cobaViewModel.alamatUsr,
+        emailnya = cobaViewModel.emailUSr,
     )
 
 }
@@ -139,7 +144,7 @@ fun TampilText(cobaViewModel: ViewModel = viewModel()){
 
 
 @Composable
-fun TextHasil(namanya:String,telponnya:String,jenisnya:String,alamatnya:String){
+fun TextHasil(namanya:String,telponnya:String,jenisnya:String,alamatnya:String, emailnya:String){
     ElevatedCard (
         elevation = CardDefaults.cardElevation(
             defaultElevation = 6.dp
@@ -160,9 +165,14 @@ fun TextHasil(namanya:String,telponnya:String,jenisnya:String,alamatnya:String){
             modifier = Modifier
                 .padding(horizontal = 10.dp, vertical = 5.dp))
         Text(
+            text = "Email : " + emailnya,
+            modifier = Modifier
+                .padding(horizontal = 10.dp, vertical = 5.dp))
+        Text(
             text = "Alamat : " + alamatnya,
             modifier = Modifier
                 .padding(horizontal = 10.dp, vertical = 5.dp))
+
 
     }
 
@@ -200,6 +210,38 @@ fun SelectJK(
 
 }
 
+@Composable
+fun SelectStatus(
+    options: List<String>,
+    onSelectedChanged: (String) -> Unit = {}) {
+
+    var selectedValue by rememberSaveable { mutableStateOf("")
+    }
+    Column (modifier = Modifier.padding(16.dp)) {
+        options.forEach { item ->
+            Row (
+                modifier = Modifier.selectable(
+                    selected = selectedValue == item,
+                    onClick = {
+                        selectedValue = item
+                        onSelectedChanged(item)
+                    }
+                ),
+                verticalAlignment = Alignment.CenterVertically
+            ){
+                RadioButton(
+                    selected = selectedValue == item,
+                    onClick = {
+                        selectedValue = item
+                        onSelectedChanged(item)
+                    }
+                )
+                Text(item)
+            }
+        }
+    }
+
+}
 
 @Preview(showBackground = true)
 @Composable
