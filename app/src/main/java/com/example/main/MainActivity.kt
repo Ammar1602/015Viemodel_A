@@ -144,7 +144,7 @@ fun TampilText(cobaViewModel: ViewModel = viewModel()){
 
 
 @Composable
-fun TextHasil(namanya:String,telponnya:String,jenisnya:String,alamatnya:String, emailnya:String){
+fun TextHasil(namanya:String,telponnya:String,jenisnya:String,emailnya:String,alamatnya:String){
     ElevatedCard (
         elevation = CardDefaults.cardElevation(
             defaultElevation = 6.dp
@@ -161,11 +161,11 @@ fun TextHasil(namanya:String,telponnya:String,jenisnya:String,alamatnya:String, 
             modifier = Modifier
                 .padding(horizontal = 10.dp, vertical = 5.dp))
         Text(
-            text = "Jenis Kelamin : " + jenisnya,
+            text = "Email : " + emailnya,
             modifier = Modifier
                 .padding(horizontal = 10.dp, vertical = 5.dp))
         Text(
-            text = "Email : " + emailnya,
+            text = "Jenis Kelamin : " + jenisnya,
             modifier = Modifier
                 .padding(horizontal = 10.dp, vertical = 5.dp))
         Text(
