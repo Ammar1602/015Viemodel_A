@@ -15,9 +15,11 @@ class CobaViewModel {
         private set
     var noTlp : String by mutableStateOf("")
         private set
+    var emailUSr : String by mutableStateOf("")
+        private set
     var jenisKL : String by mutableStateOf("")
         private set
-    var emailUSr : String by mutableStateOf("")
+    var statusUSr : String by mutableStateOf("")
         private set
     var alamatUSr : String by mutableStateOf("")
         private set
@@ -25,11 +27,12 @@ class CobaViewModel {
     private val _uiState = MutableStateFlow(DataForm())
     val uiState: StateFlow<DataForm> = _uiState.asStateFlow()
 
-    fun BacaData(nm:String,tlp:String,jk:String,eml:String,al:String){
+    fun readdata(nm:String,tlp:String,jk:String,eml:String,al:String,sts:String){
         namaUsr=nm
         noTlp=tlp
-        jenisKL=jk
         emailUSr=eml
+        jenisKL=jk
+        statusUSr=sts
         alamatUSr=al
     }
 

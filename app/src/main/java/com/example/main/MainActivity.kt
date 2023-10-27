@@ -19,6 +19,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.main.Data.DataForm
 import com.example.main.Data.DataSource.jenis
+import com.example.main.Data.DataSource.sekarang
 import com.example.main.ui.theme.MainTheme
 
 class MainActivity : ComponentActivity() {
@@ -37,8 +38,6 @@ class MainActivity : ComponentActivity() {
         }
     }
 }
-
-
 
 @Composable
 fun TampilLayout(
@@ -66,8 +65,8 @@ fun TampilText(cobaViewModel: ViewModel = viewModel()){
 
     var textForm by remember { mutableStateOf("") }
     var phoneForm by remember { mutableStateOf("") }
-    var alamatForm by remember { mutableStateOf("") }
     var emailForm by remember {mutableStateOf("")}
+    var alamatForm by remember { mutableStateOf("") }
 
     val  context = LocalContext.current
     val dataForm: DataForm
@@ -101,7 +100,7 @@ fun TampilText(cobaViewModel: ViewModel = viewModel()){
             .fillMaxWidth()
     )
     OutlinedTextField(
-        value = emailForm,,
+        value = emailForm,
         onValueChange = {emailForm = it},
         singleLine = true,
         shape = MaterialTheme.shapes.large,
@@ -122,8 +121,21 @@ fun TampilText(cobaViewModel: ViewModel = viewModel()){
         onSelectedChanged = {
             cobaViewModel.setStatus(it)
         })
+    OutlinedTextField(
+        value = alamatForm,
+        onValueChange = {alamatForm = it},
+        singleLine = true,
+        shape = MaterialTheme.shapes.large,
+        label =
+        {
+            Text(
+                text = "Alamat")},
+        modifier = Modifier
+            .padding(10.dp)
+            .fillMaxWidth()
+    )
     Button(modifier = Modifier.fillMaxWidth(),
-        onClick = {cobaViewModel.BacaData(textForm,phoneForm,emailForm,alamatForm,dataForm.sex)
+        onClick = {cobaViewModel.readdata(textForm,phoneForm,emailForm,alamatForm,dataForm.sex,dataForm.status)
         }
     ) {
         Text(text = stringResource(R.string.submit),
@@ -134,9 +146,10 @@ fun TampilText(cobaViewModel: ViewModel = viewModel()){
     TextHasil(
         namanya = cobaViewModel.namaUSr,
         telponnya =cobaViewModel.noTlp ,
+        emailnya = cobaViewModel.emailUSr,
         jenisnya = cobaViewModel.jenisKL,
         alamatnya = cobaViewModel.alamatUsr,
-        emailnya = cobaViewModel.emailUSr,
+        statusnya = cobaViewModel.statusUsr,
     )
 
 }
@@ -144,7 +157,7 @@ fun TampilText(cobaViewModel: ViewModel = viewModel()){
 
 
 @Composable
-fun TextHasil(namanya:String,telponnya:String,jenisnya:String,emailnya:String,alamatnya:String){
+fun TextHasil(namanya:String,telponnya:String,emailnya:String,jenisnya:String,statusnya: String,alamatnya:String){
     ElevatedCard (
         elevation = CardDefaults.cardElevation(
             defaultElevation = 6.dp
@@ -166,6 +179,9 @@ fun TextHasil(namanya:String,telponnya:String,jenisnya:String,emailnya:String,al
                 .padding(horizontal = 10.dp, vertical = 5.dp))
         Text(
             text = "Jenis Kelamin : " + jenisnya,
+            modifier = Modifier
+                .padding(horizontal = 10.dp, vertical = 5.dp))
+        Text(text = "Status : " + ,
             modifier = Modifier
                 .padding(horizontal = 10.dp, vertical = 5.dp))
         Text(
