@@ -38,6 +38,8 @@ class MainActivity : ComponentActivity() {
     }
 }
 
+
+
 @Composable
 fun TampilLayout(
     modifier: Modifier = Modifier
@@ -52,9 +54,12 @@ fun TampilLayout(
                 .fillMaxSize(),
         ) {
             TampilText()
+
         }
     }
 }
+
+
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun TampilText(cobaViewModel: ViewModel = viewModel()){
@@ -62,6 +67,7 @@ fun TampilText(cobaViewModel: ViewModel = viewModel()){
     var textForm by remember { mutableStateOf("") }
     var phoneForm by remember { mutableStateOf("") }
     var alamatForm by remember { mutableStateOf("") }
+    var emailForm by remember {mutableStateOf("")}
 
     val  context = LocalContext.current
     val dataForm: DataForm
@@ -95,14 +101,14 @@ fun TampilText(cobaViewModel: ViewModel = viewModel()){
             .fillMaxWidth()
     )
     OutlinedTextField(
-        value = alamatForm,
-        onValueChange = {phoneForm = it},
+        value = emailForm,,
+        onValueChange = {emailForm = it},
         singleLine = true,
         shape = MaterialTheme.shapes.large,
         label =
         {
             Text(
-                text = "Alamat")},
+                text = "Email")},
         modifier = Modifier
             .padding(10.dp)
             .fillMaxWidth()
