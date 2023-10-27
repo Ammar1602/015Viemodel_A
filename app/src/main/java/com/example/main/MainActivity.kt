@@ -58,6 +58,7 @@ fun TampilLayout(
                 .fillMaxSize(),
         ) {
             TampilText()
+            Spacer(modifier = Modifier.padding(10.dp))
             BoxHeader()
 
         }
